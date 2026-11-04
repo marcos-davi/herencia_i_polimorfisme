@@ -5,12 +5,15 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    static void main(String[] args) {
-        List<Redactor> redactors = new ArrayList<>();
-        Scanner entrada = new Scanner(System.in);
+    private static List<Redactor> redactors = new ArrayList<Redactor>();
+    private static Scanner entrada = new Scanner(System.in);
+
+    public static void main(String[] args) {
+
         int opcio;
-        Boolean sortir = false;
+        boolean sortir = false;
         do {
+            System.out.println("----------Introdueix el una opcio del menu: ----------");
             System.out.println("Selecciona una opció: ");
             System.out.println("--- GESTIÓ DE REDACCIÓ DE NOTÍCIES ---");
             System.out.println("1. Introduir redactor");
@@ -23,6 +26,7 @@ public class Main {
             System.out.println("0. Sortir");
 
             opcio = entrada.nextInt();
+            entrada.nextLine();
             switch (opcio) {
                 case 1:
                     introduirRedactor();
@@ -69,9 +73,33 @@ public class Main {
     }
 
     private static void eliminarRedactor() {
+
+
     }
 
     private static void introduirRedactor() {
+
+        System.out.println("Introdueix el nom del redactor: ");
+        String nom = entrada.nextLine();
+        System.out.println("Introdueix el DNI del redactor: ");
+        String dni = entrada.nextLine();
+
+        if (buscarRedactorPerDni(dni) != null) {
+            System.out.println("Error: Ja existeix un redactor amb aquest DNI.");
+        } else {
+            Redactor redactor = new Redactor(nom, dni);
+            redactors.add(redactor);
+            System.out.println("Redactor afegit correctament.");
+        }
+
+    }
+    private static Redactor buscarRedactorPerDni(String dni) {
+        for (Redactor r : redactors) {
+            if (r.getDni().equalsIgnoreCase(dni)) {
+                return r;
+            }
+        }
+        return null;
     }
 
 }
