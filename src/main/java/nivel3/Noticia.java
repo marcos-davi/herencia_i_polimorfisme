@@ -42,8 +42,9 @@ public abstract class Noticia {
         return preu;
     }
 
-    public void setPreu(double preu) {
+    public double setPreu(double preu) {
         this.preu = preu;
+        return preu;
     }
     // Mètodes abstractes que les classes filles estan obligades a implementar
     public abstract double calcularPreuNoticia();
