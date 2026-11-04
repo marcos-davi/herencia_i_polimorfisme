@@ -57,26 +57,6 @@ public class Main {
         }while (!sortir);
     }
 
-    private static void calcularPreuNoticia() {
-    }
-
-    private static void calcularPuntuacioNoticia() {
-    }
-
-    private static void mostrarNoticiesRedactor() {
-    }
-
-    private static void eliminarNoticia() {
-    }
-
-    private static void introduirNoticiaRedactor() {
-    }
-
-    private static void eliminarRedactor() {
-
-
-    }
-
     private static void introduirRedactor() {
 
         System.out.println("Introdueix el nom del redactor: ");
@@ -93,6 +73,32 @@ public class Main {
         }
 
     }
+
+    private static void eliminarRedactor() {
+
+    }
+
+    private static void introduirNoticiaRedactor() {
+
+    }
+
+    private static void eliminarNoticia() {
+        //(cal demanar el redactor i el titular de la notícia)
+
+    }
+
+    private static void mostrarNoticiesRedactor() {
+    }
+
+    private static void calcularPuntuacioNoticia() {
+
+    }
+
+    private static void calcularPreuNoticia() {
+
+    }
+
+
     private static Redactor buscarRedactorPerDni(String dni) {
         for (Redactor r : redactors) {
             if (r.getDni().equalsIgnoreCase(dni)) {
