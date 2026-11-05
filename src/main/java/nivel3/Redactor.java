@@ -36,6 +36,9 @@ public class Redactor {
     public void setSou(int sou) {
         Redactor.sou = sou;
     }
+    public List<Noticia> getNoticies() {
+        return llistaNoticies;
+    }
     public void afegirNoticia(Noticia noticia) {
         this.llistaNoticies.add(noticia);
     }
