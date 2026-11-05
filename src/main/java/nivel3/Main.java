@@ -25,8 +25,14 @@ public class Main {
             System.out.println("7. Calcular preu d’una notícia");
             System.out.println("0. Sortir");
 
-            opcio = entrada.nextInt();
-            entrada.nextLine();
+            if (entrada.hasNextInt()) {
+                opcio = entrada.nextInt();
+                entrada.nextLine();
+            } else {
+                System.out.println("Si us plau, introdueix un número vàlid.");
+                entrada.nextLine();
+                continue;
+            }
             switch (opcio) {
                 case 1:
                     introduirRedactor();
@@ -75,12 +81,24 @@ public class Main {
     }
 
     private static void eliminarRedactor() {
+        System.out.println("Introdueix el DNI del redactor que vol eliminar: ");
+        String dni = entrada.nextLine();
+        Redactor redactor = buscarRedactorPerDni(dni);
+
+        if (buscarRedactorPerDni(dni) == null) {
+            System.out.println("Error: No existeix un redactor amb aquest DNI.");
+        } else {
+
+            redactors.remove(redactor);
+            System.out.println("Redactor eliminat correctament.");
+        }
 
     }
 
     private static void introduirNoticiaRedactor() {
+        }
 
-    }
+
 
     private static void eliminarNoticia() {
         //(cal demanar el redactor i el titular de la notícia)
