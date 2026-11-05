@@ -96,6 +96,84 @@ public class Main {
     }
 
     private static void introduirNoticiaRedactor() {
+        System.out.println("Introdueix el DNI del redactor que al vol introduir una noticia: ");
+        String dni = entrada.nextLine();
+        Redactor redactor = buscarRedactorPerDni(dni);
+        Noticia novaNoticia = null;
+
+        if (buscarRedactorPerDni(dni) == null) {
+            System.out.println("Error: No existeix un redactor amb aquest DNI.");
+        } else {
+            boolean sortir = false;
+            int tipusEports = 0;
+
+                System.out.println("\nSelecciona el tipus de notícia:");
+                System.out.println("1. Futbol");
+                System.out.println("2. Bàsquet");
+                System.out.println("3. Tenis");
+                System.out.println("4. Fórmula 1");
+                System.out.println("5. Motociclisme");
+                System.out.print("Opció d'esport: ");
+
+
+                if (entrada.hasNextInt()) {
+                    tipusEports = entrada.nextInt();
+                    entrada.nextLine();
+                } else {
+                    System.out.println("Si us plau, introdueix un número vàlid.");
+                    entrada.nextLine();
+                }
+                System.out.println("Introdueix un titular");
+                String titular = entrada.nextLine();
+
+
+                switch (tipusEports) {
+                    case 1:
+                        System.out.println("Introdueix una competicio (ex: Lliga de Campions o Lliga): ");
+                        String competFutebol = entrada.nextLine();
+                        System.out.println("Introdueix un clubFutebol (ex: Barça, Madrid): ");
+                        String clubFutebol = entrada.nextLine();
+                        System.out.println("Introdueix un jugadorFutbol (ex: Ferran Torres o Benzema): ");
+                        String jugadorFutbol = entrada.nextLine();
+                        novaNoticia = new NoticiaFutbol(titular, competFutebol, clubFutebol, jugadorFutbol);
+                        break;
+
+                    case 2:
+                        System.out.print("Introdueix la competició (ex: Eurolliga, ACB): ");
+                        String compBasquet = entrada.nextLine();
+                        System.out.print("Introdueix el club (ex: Barça, Madrid): ");
+                        String clubBasquet = entrada.nextLine();
+                        novaNoticia = new NoticiaBasquet(titular, compBasquet, clubBasquet);
+                        break;
+
+                    case 3:
+                        System.out.print("Introdueix la competició: ");
+                        String compTenis = entrada.nextLine();
+                        System.out.print("Introdueix el tenista principal (ex: Nadal, Federer, Djokovic): ");
+                        String tenista = entrada.nextLine();
+                        novaNoticia = new NoticiaTenis(titular, compTenis, tenista);
+                        break;
+
+                    case 4:
+                        System.out.print("Introdueix l'escuderia (ex: Ferrari, Mercedes): ");
+                        String escuderia = entrada.nextLine();
+                        novaNoticia = new NoticiaF1(titular, escuderia);
+                        break;
+
+                    case 5:
+                        System.out.print("Introdueix l'equip (ex: Honda, Yamaha): ");
+                        String equip = entrada.nextLine();
+                        novaNoticia = new NoticiaMotociclisme(titular, equip);
+                        break;
+
+                    default:
+                        System.out.println("Tipus d'esport no reconegut.");
+                        return;
+                }
+                redactor.afegirNoticia(novaNoticia);
+                System.out.println("Notícia creada i assignada al redactor correctament!");
+        }
+
         }
 
 
