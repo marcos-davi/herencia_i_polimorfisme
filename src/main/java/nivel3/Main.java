@@ -107,6 +107,8 @@ public class Main {
             boolean sortir = false;
             int tipusEports = 0;
 
+                System.out.println("\nRedactor: " + redactor.getNom() +" " + redactor.getDni());
+
                 System.out.println("\nSelecciona el tipus de notícia:");
                 System.out.println("1. Futbol");
                 System.out.println("2. Bàsquet");
@@ -180,6 +182,23 @@ public class Main {
 
     private static void eliminarNoticia() {
         //(cal demanar el redactor i el titular de la notícia)
+        // ATASCADO AQUI!!!!
+        System.out.println("Introdueix el DNI del redactor que al vol eliminar una noticia: ");
+        String dni = entrada.nextLine();
+
+        Redactor redactor = buscarRedactorPerDni(dni);
+        List<Noticia> noticiaAeliminar = new ArrayList<>();
+        Noticia novaNoticia = null;
+
+        if (buscarRedactorPerDni(dni) == null) {
+            System.out.println("Error: No existeix un redactor amb aquest DNI.");
+        } else {
+            System.out.println("Introdueix el titular de la noticia  que vol eliminar: ");
+            String titular = entrada.nextLine();
+
+        }
+
+
 
     }
 
