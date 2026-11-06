@@ -182,19 +182,27 @@ public class Main {
 
     private static void eliminarNoticia() {
         //(cal demanar el redactor i el titular de la notícia)
-        // ATASCADO AQUI!!!!
-        System.out.println("Introdueix el DNI del redactor que al vol eliminar una noticia: ");
+
+        ArrayList<Noticia> noticiaEliminar = null;
+        System.out.println("Introdueix el DNI del redactor al que  vol eliminar una noticia: ");
         String dni = entrada.nextLine();
+        Redactor redactorEliminar = buscarRedactorPerDni(dni);
 
-        Redactor redactor = buscarRedactorPerDni(dni);
-        List<Noticia> noticiaAeliminar = new ArrayList<>();
-        Noticia novaNoticia = null;
-
-        if (buscarRedactorPerDni(dni) == null) {
+        if (redactorEliminar == null) {
             System.out.println("Error: No existeix un redactor amb aquest DNI.");
         } else {
+            noticiaEliminar = redactorEliminar.getNoticies();
+
             System.out.println("Introdueix el titular de la noticia  que vol eliminar: ");
             String titular = entrada.nextLine();
+            for(Noticia n: noticiaEliminar) {
+                if (n.getTitular().equalsIgnoreCase(titular)) {
+                    noticiaEliminar.remove(n);
+                    System.out.println("Noticia eliminada correctament.");
+                    return;
+                }
+            }
+            System.out.println("Error: No existeix una noticia amb aquest titular.");
 
         }
 
