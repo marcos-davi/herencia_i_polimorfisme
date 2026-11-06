@@ -7,7 +7,7 @@ public class Redactor {
     private String nom;
     private final String dni;
     private static int sou = 1500;
-    private List<Noticia> llistaNoticies;
+    private ArrayList<Noticia> llistaNoticies;
 
 
     // constructor
@@ -36,7 +36,7 @@ public class Redactor {
     public void setSou(int sou) {
         Redactor.sou = sou;
     }
-    public List<Noticia> getNoticies() {
+    public ArrayList<Noticia> getNoticies() {
         return llistaNoticies;
     }
     public void afegirNoticia(Noticia noticia) {
