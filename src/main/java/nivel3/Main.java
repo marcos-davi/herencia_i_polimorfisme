@@ -211,6 +211,19 @@ public class Main {
     }
 
     private static void mostrarNoticiesRedactor() {
+        ArrayList<Noticia> mostrarNoticias = null;
+        System.out.println("Introdueix el DNI del redactor al que  vol eliminar una noticia: ");
+        String dni = entrada.nextLine();
+        Redactor redactorNoticias = buscarRedactorPerDni(dni);
+        if (redactorNoticias == null) {
+            System.out.println("Error: No existeix un redactor amb aquest DNI.");
+        }else {
+            mostrarNoticias = redactorNoticias.getNoticies();
+            for (Noticia n : mostrarNoticias) {
+                System.out.println("Titular: " + n.getTitular());
+            }
+        }
+
     }
 
     private static void calcularPuntuacioNoticia() {
