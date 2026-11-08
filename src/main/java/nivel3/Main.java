@@ -221,16 +221,60 @@ public class Main {
             mostrarNoticias = redactorNoticias.getNoticies();
             for (Noticia n : mostrarNoticias) {
                 System.out.println("Titular: " + n.getTitular());
+                System.out.println("Puntuació: " + n.getPuntuacio());
+                System.out.println("Preu: " + n.getPreu());
             }
         }
 
     }
 
     private static void calcularPuntuacioNoticia() {
+        System.out.println("Introdueix el DNI del redactor: ");
+        String dni = entrada.nextLine();
+        Redactor redactor = buscarRedactorPerDni(dni);
+
+        if (redactor == null) {
+            System.out.println("Error: No existeix un redactor amb aquest DNI.");
+            return;
+        }
+
+        System.out.println("Introdueix el titular de la notícia: ");
+        String titular = entrada.nextLine();
+
+        for (Noticia n : redactor.getNoticies()) {
+            if (n.getTitular().equalsIgnoreCase(titular)) {
+                // El polimorfismo ejecuta el cálculo específico del deporte
+                int punts = n.calcularPuntuacio();
+                System.out.println("La puntuació de la notícia és: " + punts + " punts.");
+                return;
+            }
+        }
+        System.out.println("Error: No s'ha trobat cap notícia amb aquest titular.");
 
     }
 
     private static void calcularPreuNoticia() {
+        System.out.println("Introdueix el DNI del redactor: ");
+        String dni = entrada.nextLine();
+        Redactor redactor = buscarRedactorPerDni(dni);
+
+        if (redactor == null) {
+            System.out.println("Error: No existeix un redactor amb aquest DNI.");
+            return;
+        }
+
+        System.out.println("Introdueix el titular de la notícia: ");
+        String titular = entrada.nextLine();
+
+        for (Noticia n : redactor.getNoticies()) {
+            if (n.getTitular().equalsIgnoreCase(titular)) {
+                // El polimorfismo ejecuta el cálculo específico del deporte
+                double preu = n.calcularPreuNoticia();
+                System.out.println("El preu de la notícia és: " + preu + " €.");
+                return;
+            }
+        }
+        System.out.println("Error: No s'ha trobat cap notícia amb aquest titular.");
 
     }
 
