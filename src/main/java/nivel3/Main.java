@@ -6,14 +6,18 @@ import java.util.Scanner;
 
 public class Main {
     private static List<Redactor> redactors = new ArrayList<Redactor>();
-    private static Scanner entrada = new Scanner(System.in);
+    private static Scanner enter = new Scanner(System.in);
 
     public static void main(String[] args) {
 
-        int opcio;
-        boolean sortir = false;
+        showMenu();
+    }
+
+    private static void showMenu() {
+        int option;
+        boolean getOut = false;
         do {
-            System.out.println("----------Introdueix el una opcio del menu: ----------");
+            System.out.println("----------Introdueix el una opció del menu: ----------");
             System.out.println("Selecciona una opció: ");
             System.out.println("--- GESTIÓ DE REDACCIÓ DE NOTÍCIES ---");
             System.out.println("1. Introduir redactor");
@@ -25,67 +29,67 @@ public class Main {
             System.out.println("7. Calcular preu d’una notícia");
             System.out.println("0. Sortir");
 
-            if (entrada.hasNextInt()) {
-                opcio = entrada.nextInt();
-                entrada.nextLine();
+            if (enter.hasNextInt()) {
+                option = enter.nextInt();
+                enter.nextLine();
             } else {
                 System.out.println("Si us plau, introdueix un número vàlid.");
-                entrada.nextLine();
+                enter.nextLine();
                 continue;
             }
-            switch (opcio) {
+            switch (option) {
                 case 1:
-                    introduirRedactor();
+                    addRedactor();
                     break;
                 case 2:
-                    eliminarRedactor();
+                    deleteRedactor();
                     break;
                 case 3:
-                    introduirNoticiaRedactor();
+                    addNewsToRedactor();
                     break;
                 case 4:
-                    eliminarNoticia();
+                    deleteNews();
                     break;
                 case 5:
-                    mostrarNoticiesRedactor();
+                    showRedactorNews();
                     break;
                 case 6:
-                    calcularPuntuacioNoticia();
+                    calculateNewsPuntuaction();
                     break;
                 case 7:
-                    calcularPreuNoticia();
+                    calculateNewsPrice();
                     break;
                 case 0:
                     System.out.println("Gràcies per utilitzar l'aplicació. Fins aviat!");
-                    sortir = true;
+                    getOut = true;
                     break;
             }
-        }while (!sortir);
+        }while (!getOut);
     }
 
-    private static void introduirRedactor() {
+    private static void addRedactor() {
 
         System.out.println("Introdueix el nom del redactor: ");
-        String nom = entrada.nextLine();
+        String name = enter.nextLine();
         System.out.println("Introdueix el DNI del redactor: ");
-        String dni = entrada.nextLine();
+        String id = enter.nextLine();
 
-        if (buscarRedactorPerDni(dni) != null) {
+        if (findRedactorById(id) != null) {
             System.out.println("Error: Ja existeix un redactor amb aquest DNI.");
         } else {
-            Redactor redactor = new Redactor(nom, dni);
+            Redactor redactor = new Redactor(name, id);
             redactors.add(redactor);
             System.out.println("Redactor afegit correctament.");
         }
 
     }
 
-    private static void eliminarRedactor() {
+    private static void deleteRedactor() {
         System.out.println("Introdueix el DNI del redactor que vol eliminar: ");
-        String dni = entrada.nextLine();
-        Redactor redactor = buscarRedactorPerDni(dni);
+        String dni = enter.nextLine();
+        Redactor redactor = findRedactorById(dni);
 
-        if (buscarRedactorPerDni(dni) == null) {
+        if (findRedactorById(dni) == null) {
             System.out.println("Error: No existeix un redactor amb aquest DNI.");
         } else {
 
@@ -95,19 +99,19 @@ public class Main {
 
     }
 
-    private static void introduirNoticiaRedactor() {
+    private static void addNewsToRedactor() {
         System.out.println("Introdueix el DNI del redactor que al vol introduir una noticia: ");
-        String dni = entrada.nextLine();
-        Redactor redactor = buscarRedactorPerDni(dni);
-        Noticia novaNoticia = null;
+        String id = enter.nextLine();
+        Redactor redactor = findRedactorById(id);
+        News newNews = null;
 
-        if (buscarRedactorPerDni(dni) == null) {
+        if (findRedactorById(id) == null) {
             System.out.println("Error: No existeix un redactor amb aquest DNI.");
         } else {
             boolean sortir = false;
-            int tipusEports = 0;
+            int sportType = 0;
 
-                System.out.println("\nRedactor: " + redactor.getNom() +" " + redactor.getDni());
+                System.out.println("\nRedactor: " + redactor.getName() +" " + redactor.getId());
 
                 System.out.println("\nSelecciona el tipus de notícia:");
                 System.out.println("1. Futbol");
@@ -118,61 +122,61 @@ public class Main {
                 System.out.print("Opció d'esport: ");
 
 
-                if (entrada.hasNextInt()) {
-                    tipusEports = entrada.nextInt();
-                    entrada.nextLine();
+                if (enter.hasNextInt()) {
+                    sportType = enter.nextInt();
+                    enter.nextLine();
                 } else {
                     System.out.println("Si us plau, introdueix un número vàlid.");
-                    entrada.nextLine();
+                    enter.nextLine();
                 }
                 System.out.println("Introdueix un titular");
-                String titular = entrada.nextLine();
+                String title = enter.nextLine();
 
 
-                switch (tipusEports) {
+                switch (sportType) {
                     case 1:
                         System.out.println("Introdueix una competicio (ex: Lliga de Campions o Lliga): ");
-                        String competFutebol = entrada.nextLine();
+                        String soccerCompet = enter.nextLine();
                         System.out.println("Introdueix un clubFutebol (ex: Barça, Madrid): ");
-                        String clubFutebol = entrada.nextLine();
-                        System.out.println("Introdueix un jugadorFutbol (ex: Ferran Torres o Benzema): ");
-                        String jugadorFutbol = entrada.nextLine();
-                        novaNoticia = new NoticiaFutbol(titular, competFutebol, clubFutebol, jugadorFutbol);
+                        String soccerClub = enter.nextLine();
+                        System.out.println("Introdueix un futiboliste (ex: Ferran Torres o Benzema): ");
+                        String soccerPlayer = enter.nextLine();
+                        newNews = new SoccerNews(title, soccerCompet, soccerClub, soccerPlayer);
                         break;
 
                     case 2:
                         System.out.print("Introdueix la competició (ex: Eurolliga, ACB): ");
-                        String compBasquet = entrada.nextLine();
+                        String basketNews = enter.nextLine();
                         System.out.print("Introdueix el club (ex: Barça, Madrid): ");
-                        String clubBasquet = entrada.nextLine();
-                        novaNoticia = new NoticiaBasquet(titular, compBasquet, clubBasquet);
+                        String basketClub = enter.nextLine();
+                        newNews = new BasketballNews(title, basketNews, basketClub);
                         break;
 
                     case 3:
                         System.out.print("Introdueix la competició: ");
-                        String compTenis = entrada.nextLine();
+                        String tennisComp = enter.nextLine();
                         System.out.print("Introdueix el tenista principal (ex: Nadal, Federer, Djokovic): ");
-                        String tenista = entrada.nextLine();
-                        novaNoticia = new NoticiaTenis(titular, compTenis, tenista);
+                        String tennisPlayer = enter.nextLine();
+                        newNews = new TennisNews(title, tennisComp, tennisPlayer);
                         break;
 
                     case 4:
                         System.out.print("Introdueix l'escuderia (ex: Ferrari, Mercedes): ");
-                        String escuderia = entrada.nextLine();
-                        novaNoticia = new NoticiaF1(titular, escuderia);
+                        String f1Team = enter.nextLine();
+                        newNews = new F1News(title, f1Team);
                         break;
 
                     case 5:
                         System.out.print("Introdueix l'equip (ex: Honda, Yamaha): ");
-                        String equip = entrada.nextLine();
-                        novaNoticia = new NoticiaMotociclisme(titular, equip);
+                        String teamMoto = enter.nextLine();
+                        newNews = new MotorcyclingNews(title, teamMoto);
                         break;
 
                     default:
                         System.out.println("Tipus d'esport no reconegut.");
                         return;
                 }
-                redactor.afegirNoticia(novaNoticia);
+                redactor.addNews(newNews);
                 System.out.println("Notícia creada i assignada al redactor correctament!");
         }
 
@@ -180,24 +184,22 @@ public class Main {
 
 
 
-    private static void eliminarNoticia() {
-        //(cal demanar el redactor i el titular de la notícia)
-
-        ArrayList<Noticia> noticiaEliminar = null;
+    private static void deleteNews() {
+        List<News> newsDelete = null;
         System.out.println("Introdueix el DNI del redactor al que  vol eliminar una noticia: ");
-        String dni = entrada.nextLine();
-        Redactor redactorEliminar = buscarRedactorPerDni(dni);
+        String id = enter.nextLine();
+        Redactor redactorDelete = findRedactorById(id);
 
-        if (redactorEliminar == null) {
+        if (redactorDelete == null) {
             System.out.println("Error: No existeix un redactor amb aquest DNI.");
         } else {
-            noticiaEliminar = redactorEliminar.getNoticies();
+            newsDelete = redactorDelete.getNews();
 
             System.out.println("Introdueix el titular de la noticia  que vol eliminar: ");
-            String titular = entrada.nextLine();
-            for(Noticia n: noticiaEliminar) {
-                if (n.getTitular().equalsIgnoreCase(titular)) {
-                    noticiaEliminar.remove(n);
+            String title = enter.nextLine();
+            for(News n: newsDelete) {
+                if (n.getTitle().equalsIgnoreCase(title)) {
+                    newsDelete.remove(n);
                     System.out.println("Noticia eliminada correctament.");
                     return;
                 }
@@ -210,28 +212,28 @@ public class Main {
 
     }
 
-    private static void mostrarNoticiesRedactor() {
-        ArrayList<Noticia> mostrarNoticias = null;
+    private static void showRedactorNews() {
+        List<News> mostrarNews = null;
         System.out.println("Introdueix el DNI del redactor al que  vol eliminar una noticia: ");
-        String dni = entrada.nextLine();
-        Redactor redactorNoticias = buscarRedactorPerDni(dni);
+        String dni = enter.nextLine();
+        Redactor redactorNoticias = findRedactorById(dni);
         if (redactorNoticias == null) {
             System.out.println("Error: No existeix un redactor amb aquest DNI.");
         }else {
-            mostrarNoticias = redactorNoticias.getNoticies();
-            for (Noticia n : mostrarNoticias) {
-                System.out.println("Titular: " + n.getTitular());
-                System.out.println("Puntuació: " + n.getPuntuacio());
-                System.out.println("Preu: " + n.getPreu());
+            mostrarNews = redactorNoticias.getNews();
+            for (News n : mostrarNews) {
+                System.out.println("Titular: " + n.getTitle());
+                System.out.println("Puntuació: " + n.getPunctuation());
+                System.out.println("Preu: " + n.getPrice());
             }
         }
 
     }
 
-    private static void calcularPuntuacioNoticia() {
+    private static void calculateNewsPuntuaction() {
         System.out.println("Introdueix el DNI del redactor: ");
-        String dni = entrada.nextLine();
-        Redactor redactor = buscarRedactorPerDni(dni);
+        String dni = enter.nextLine();
+        Redactor redactor = findRedactorById(dni);
 
         if (redactor == null) {
             System.out.println("Error: No existeix un redactor amb aquest DNI.");
@@ -239,12 +241,12 @@ public class Main {
         }
 
         System.out.println("Introdueix el titular de la notícia: ");
-        String titular = entrada.nextLine();
+        String titular = enter.nextLine();
 
-        for (Noticia n : redactor.getNoticies()) {
-            if (n.getTitular().equalsIgnoreCase(titular)) {
+        for (News n : redactor.getNews()) {
+            if (n.getTitle().equalsIgnoreCase(titular)) {
                 // El polimorfismo ejecuta el cálculo específico del deporte
-                int punts = n.calcularPuntuacio();
+                int punts = n.calculateNewsPunctuation();
                 System.out.println("La puntuació de la notícia és: " + punts + " punts.");
                 return;
             }
@@ -253,10 +255,10 @@ public class Main {
 
     }
 
-    private static void calcularPreuNoticia() {
+    private static void calculateNewsPrice() {
         System.out.println("Introdueix el DNI del redactor: ");
-        String dni = entrada.nextLine();
-        Redactor redactor = buscarRedactorPerDni(dni);
+        String dni = enter.nextLine();
+        Redactor redactor = findRedactorById(dni);
 
         if (redactor == null) {
             System.out.println("Error: No existeix un redactor amb aquest DNI.");
@@ -264,12 +266,11 @@ public class Main {
         }
 
         System.out.println("Introdueix el titular de la notícia: ");
-        String titular = entrada.nextLine();
+        String titular = enter.nextLine();
 
-        for (Noticia n : redactor.getNoticies()) {
-            if (n.getTitular().equalsIgnoreCase(titular)) {
-                // El polimorfismo ejecuta el cálculo específico del deporte
-                double preu = n.calcularPreuNoticia();
+        for (News n : redactor.getNews()) {
+            if (n.getTitle().equalsIgnoreCase(titular)) {
+                double preu = n.calculateNewsPrice();
                 System.out.println("El preu de la notícia és: " + preu + " €.");
                 return;
             }
@@ -279,9 +280,9 @@ public class Main {
     }
 
 
-    private static Redactor buscarRedactorPerDni(String dni) {
+    private static Redactor findRedactorById(String dni) {
         for (Redactor r : redactors) {
-            if (r.getDni().equalsIgnoreCase(dni)) {
+            if (r.getId().equalsIgnoreCase(dni)) {
                 return r;
             }
         }

@@ -4,42 +4,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Redactor {
-    private String nom;
-    private final String dni;
-    private static int sou = 1500;
-    private ArrayList<Noticia> llistaNoticies;
+    private String name;
+    private final String id;
+    private static int salary = 1500;
+    private ArrayList<News> newsList;
 
 
     // constructor
-    public Redactor(String nom, String dni) {
-        this.nom = nom;
-        this.dni = dni;
-        this.llistaNoticies = new ArrayList<>();
+    public Redactor(String name, String id) {
+        this.name = name;
+        this.id = id;
+        this.newsList = new ArrayList<>();
     }
 
     // Getters and Setters
 
-    public String getNom() {
-        return nom;
+    public String getName() {
+        return name;
     }
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getDni() {
-        return dni;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public static int getSou() {
-        return sou;
+    public String getId() {
+        return id;
     }
-    public void setSou(int sou) {
-        Redactor.sou = sou;
+
+    public static int getSalary() {
+        return salary;
     }
-    public ArrayList<Noticia> getNoticies() {
-        return llistaNoticies;
+    public void setSalary(int salary) {
+        Redactor.salary = salary;
     }
-    public void afegirNoticia(Noticia noticia) {
-        this.llistaNoticies.add(noticia);
+
+    public List<News> getNews() {
+        return newsList;
+    }
+    public void addNews(News news) {
+        this.newsList.add(news);
     }
 }
