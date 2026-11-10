@@ -1,13 +1,16 @@
 package nivel1.exercise1;
 
 public class StringInstrument extends Instrument {
-    String name = "Viola";
-    int price = 800;
+
+
+    public StringInstrument(String name, int price) {
+        super(name, price);
+    }
 
     // methode play implemented
     @Override
     public void play() {
-        System.out.println("Està sonant un instrument de corda");
+        System.out.println("Està sonant un " + super.getName());
 
     }
 }
