@@ -9,9 +9,6 @@ public class Car {
         this.power = power;
     }
 
-     public static String getModel() {
-        return model;
-    }
 
     //mètode estàtic brake()
     static void brake() {
